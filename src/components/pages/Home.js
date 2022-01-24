@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Container, CardGroup, Button } from 'react-bootstrap';
 
-import pic1 from './stockPhotos/brainstorm.jpg';
-import pic2 from './stockPhotos/lightbulb.jpg';
-import pic3 from './stockPhotos/working.jpg';
+import pic1 from '../stockPhotos/brainstorm.jpg';
+import pic2 from '../stockPhotos/lightbulb.jpg';
+import pic3 from '../stockPhotos/working.jpg';
 
 export default function Home() {
 
