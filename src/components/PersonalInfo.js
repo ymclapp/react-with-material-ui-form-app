@@ -7,13 +7,15 @@ export default function PersonalInfo({ formData, setFormData }) {
         type='text'
         placeholder='First Name...'
         value={formData.firstName}
-        onChange={(event) => setFormData({ ...formData, firstName: event.target.value })} />
+        onChange={(event) => setFormData({ ...formData, firstName: event.target.value })} 
+        />
 
       <input
         type='text'
         placeholder='Last Name...'
         value={formData.lastName}
-        onChange={(event) => setFormData({ ...formData, lastName: event.target.value })} />
+        onChange={(event) => setFormData({ ...formData, lastName: event.target.value })} 
+        />
 
       <input
         type='text'
