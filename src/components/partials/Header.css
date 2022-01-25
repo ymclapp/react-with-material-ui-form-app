@@ -1,0 +1,12 @@
+/* @font-face {
+    font-family: 'RoklienRegular';
+    src: url('/src/Components/Home/css/Roklien.ttf');
+  } */
+  
+  h1{
+    background-color: #0794d1f5;
+    padding-top: 18px;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+  }
+
