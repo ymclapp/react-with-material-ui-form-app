@@ -17,18 +17,10 @@ export default function Registration(props) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
-    //const { setActiveUser, setLoggedIn } = props;
-
 
     async function handleNewUserSubmit(event) {
         event.preventDefault();
         const form = event.target;
-        // const reqBody = {
-        //     fullname: firstName + ' ' + lastName,
-        //     email,
-        //     password,
-        // };
-
         console.log('Submitting....');
 
         axios
@@ -45,15 +37,12 @@ export default function Registration(props) {
                 console.log('Well done!');
                 console.log('User profile', response.data.user);
                 console.log('User token', response.data.jwt);
-
             })
 
             .catch(error => {
                 // Handle error.
                 console.log('An error occurred:', error.response);
             });
-
-
 
         form.reset();
         history.push('/login');
