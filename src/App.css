@@ -58,8 +58,8 @@ body {
 .form-container .footer button {
   border-radius: 7px;
   width: 100px;
-  height: 40px;
-  background-color: rgb(35, 17, 199);
+  height: 45px;
+  background-color: rgb(32, 10, 231);
   /* font-weight: bold; */
   color: white;
   border: 0 none;
@@ -68,6 +68,7 @@ body {
   padding: 10px 5px;
   margin: 10px 5px;
   margin: 5px;
+  font-size: large;
 }
 
 .sign-up-container {

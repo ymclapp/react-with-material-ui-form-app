@@ -4,8 +4,7 @@
 3.  
 
 ###  References:
-1.  https://www.youtube.com/watch?v=zT62eVxShsY
-2.  https://www.youtube.com/watch?v=wOxP4k9f5rk
+1.  https://www.youtube.com/watch?v=wOxP4k9f5rk
 
 ##  Usage info:
--  UserForm.js is the parent form/wrapper for the rest of the forms elements that we will call
+-  Form.js is the parent form/wrapper for the rest of the forms elements that we will call
