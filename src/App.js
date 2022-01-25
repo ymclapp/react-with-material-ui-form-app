@@ -11,6 +11,7 @@ import Footer from './components/partials/Footer';
 
 //public pages
 import Home from './components/pages/Home';
+import Registration from './components/user/Registration';
 
 //conference
 import Form from './components/conference/Form';
@@ -32,6 +33,10 @@ function App() {
 
           <Route path='/form'>
             <Form />
+          </Route>
+
+          <Route path='/registration'>
+            <Registration />
           </Route>
 
         </Switch>
