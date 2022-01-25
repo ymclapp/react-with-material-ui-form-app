@@ -1,0 +1,26 @@
+.form-title{
+    margin-bottom: 35px;
+    margin-top: 20px;
+  }
+  
+  .SessionsForm{
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 10px;
+    width: 450px;
+    height: 630px;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    padding: 20px;
+    /* font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* .demo-button{
+    margin-top: 30px;
+    margin-left: 15px;
+    color: black;
+    background-color: #E7F0FE;
+    border: 1px solid #ccdcf5 !important;
+  } */
