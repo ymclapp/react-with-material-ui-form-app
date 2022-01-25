@@ -1,53 +1,63 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-//import axios from 'axios';
-import { Form, FloatingLabel, Button } from 'react-bootstrap';
 import axios from 'axios';
+import { Form, FloatingLabel, Button } from 'react-bootstrap';
+
 
 import './Registration.css';
 
-//const userApi = 'http://localhost:1337/api/auth/local/register';
+const userApi = 'http://localhost:1337/api/auth/local/register';
 
-export default function Registration() {
+export default function Registration(props) {
 
     const history = useHistory();
 
-const [username, setUsername] = useState('')
-const [email, setEmail] = useState('')
-const [firstName, setFirstName] = useState('')
-const [lastName, setLastName] = useState('')
-const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [password, setPassword] = useState('')
+    //const { setActiveUser, setLoggedIn } = props;
 
 
     async function handleNewUserSubmit(event) {
         event.preventDefault();
         const form = event.target;
-        // const { username, email, firstName, lastName, password } = form.elements;
+        // const reqBody = {
+        //     fullname: firstName + ' ' + lastName,
+        //     email,
+        //     password,
+        // };
 
         console.log('Submitting....');
 
         axios
-  .post('http://localhost:1337/api/auth/local/register', {
-    username,
-    email,
-    firstName,
-    lastName,
-    password,
-  })
-  .then(response => {
-    // Handle success.
-    console.log('Well done!');
-    console.log('User profile', response.data.user);
-    console.log('User token', response.data.jwt);
-  })
-  .catch(error => {
-    // Handle error.
-    console.log('An error occurred:', error.response);
-  });
+            .post(`${userApi}`, {
+                username,
+                email,
+                firstName,
+                lastName,
+                password,
+            })
+
+            .then(response => {
+                // Handle success.
+                console.log('Well done!');
+                console.log('User profile', response.data.user);
+                console.log('User token', response.data.jwt);
+
+            })
+
+            .catch(error => {
+                // Handle error.
+                console.log('An error occurred:', error.response);
+            });
+
+
 
         form.reset();
         history.push('/login');
-        
+
     }
 
     return (
