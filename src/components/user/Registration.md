@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 //import axios from 'axios';
 import { Form, FloatingLabel, Button } from 'react-bootstrap';
-import axios from 'axios';
 
 import './Registration.css';
 
-//const userApi = 'http://localhost:1337/api/auth/local/register';
+const userApi = 'http://localhost:1337/api/auth/local/register';
 
 export default function Registration() {
 
@@ -26,24 +25,18 @@ const [password, setPassword] = useState('')
 
         console.log('Submitting....');
 
-        axios
-  .post('http://localhost:1337/api/auth/local/register', {
-    username,
-    email,
-    firstName,
-    lastName,
-    password,
-  })
-  .then(response => {
-    // Handle success.
-    console.log('Well done!');
-    console.log('User profile', response.data.user);
-    console.log('User token', response.data.jwt);
-  })
-  .catch(error => {
-    // Handle error.
-    console.log('An error occurred:', error.response);
-  });
+        await fetch(`${userApi}`, {
+            method:  'post',
+            headers:  {
+                'Content-Type':  'application/json',
+            },
+
+            body:  JSON.stringify(
+                { username, email, firstName, lastName, password }
+            ),
+        })
+        .then(response => response.text())
+        .then(data => console.log(data))
 
         form.reset();
         history.push('/login');
@@ -91,4 +84,3 @@ const [password, setPassword] = useState('')
         </>
     )
 }
-
