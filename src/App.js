@@ -19,7 +19,7 @@ import Home from './components/pages/Home';
 import Registration from './components/user/Registration';
 
 //user pages
-import Login from './components/user/login';
+import Login from './components/user/Login';
 
 //conference
 import Form from './components/conference/Form';
