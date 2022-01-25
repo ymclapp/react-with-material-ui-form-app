@@ -8,10 +8,18 @@ import NavMenu from './components/partials/NavMenu';
 import Header from './components/partials/Header';
 import Footer from './components/partials/Footer';
 
+//admin dashboard
+import Demo from './components/dashboard/Demographics';
+import Users from './components/dashboard/Users';
+import Sessions from './components/dashboard/Sessions';
+
 
 //public pages
 import Home from './components/pages/Home';
 import Registration from './components/user/Registration';
+
+//user pages
+import Login from './components/user/login';
 
 //conference
 import Form from './components/conference/Form';
@@ -37,6 +45,17 @@ function App() {
 
           <Route path='/registration'>
             <Registration />
+          </Route>
+
+          <Route path='/login'>
+            <Login />
+          </Route>
+
+          <Route path='/dashboard'>
+            <Users />
+            <Demo />
+            <Sessions />
+
           </Route>
 
         </Switch>
