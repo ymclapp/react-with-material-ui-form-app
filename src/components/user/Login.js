@@ -1,60 +1,117 @@
-import './login.css';
-import axios from 'axios';
-import { FloatingLabel, Form, Button } from 'react-bootstrap';
+import { useRef, useState, useEffect, useContext } from 'react';
+import AuthContext from '../../context/AuthProvider';
+import { Form, Button } from 'react-bootstrap';
 
-export default function Login() {
+import axios from '../../api/axios';
+const LOGIN_URL = '/auth/local'; //he says that this is in his node.js beginner course
 
-    async function handleLoginSubmit(event) {
-        event.preventDefault();
 
-        const form = event.target;
-        const { username, password } = form.elements;
 
-        // Request API.
-        axios
-            .post('http://localhost:1337/api/auth/local', {
-                identifier: username.value,
-                password: password.value,
-            })
-            .then(response => {
-                // Handle success.
-                console.log('Well done!');
-                console.log('User profile', response.data.user);
-                console.log('User token', response.data.jwt);
-            })
-            .catch(error => {
-                // Handle error.
-                console.log('An error occurred:', error.response);
-            });
 
-        form.reset();
+//https://www.youtube.com/watch?v=X3qyxo_UTR4
+
+
+const Login = () => {
+
+    const { setAuth } = useContext(AuthContext);
+    const userRef = useRef();
+    const errRef = useRef();
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);  //replace with redirect (history) after successful login - just for tutorial
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [username, password])
+
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(LOGIN_URL,
+                JSON.stringify({ identifier:  username, password }),
+                {
+                    headers:  { 'Content-Type': 'application/json'},
+                    //withCredentials: true
+                }
+                );
+                console.log(JSON.stringify(response?.data))
+                const accessToken = response?.data.jwt;
+                const roles = response?.data.roles;
+                setAuth({username, password, roles, accessToken});
+            setUsername('');
+            setPassword('');
+            setSuccess(true);
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing/Incorrect Username or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                setErrMsg('Login Failed');
+            }
+            errRef.current.focus();
+        }
     }
+
 
     return (
         <>
-            <Form className='login-form' onSubmit={handleLoginSubmit}>
-                <h4 className='form-title text-center'>Log In to Continue </h4>
-                <Form.Group>
-
-                    <FloatingLabel controlId='floatingInput1' label='Username:  ' className='loginUsername'>
-                        <Form.Control type='text' name='username' />
-                    </FloatingLabel>
-
+            {success ? (
+                <section>
+                    <h1> You are logged in!</h1>
                     <br />
+                    <p>
+                        <a href='/home'>Go to Home</a>
+                    </p>
+                </section>
+            ) : (
+                <section>
+                    <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live='assertive'>{errMsg}</p>
+                    <h1>Sign In</h1>
 
-                    <FloatingLabel controlId='floatingInput2' label='Password:  ' className='loginPassword'>
-                        <Form.Control type='password' name='password' />
-                    </FloatingLabel>
+                    <Form onSubmit={handleLoginSubmit}>
 
-                    <Button type='submit' className='login-button'>Log In</Button>
-                    <br /><br />
-                    <a href='/registration'>Create Account</a>
+                        <Form.Label htmlFor='username'>Username:  </Form.Label>
+                        <Form.Control
+                            type='text'
+                            id='username'
+                            ref={userRef}
+                            autoComplete='off'
+                            onChange={e => setUsername(e.target.value)}
+                            value={username}
+                            required
+                        />
 
-                </Form.Group>
-            </Form>
-            <div>
-
-            </div>
+                        <Form.Label htmlFor='password'>password:  </Form.Label>
+                        <Form.Control
+                            type='password'
+                            id='password'
+                            onChange={e => setPassword(e.target.value)}
+                            value={password}
+                            required
+                        />
+                        <Button type='submit' className='login-button'>Sign In</Button>
+                    </Form>
+                    <p>
+                        Don't have an account?<br />
+                        <span className='line'>
+                            {/* put router link here */}
+                            <a href='/registration'> Create an Account</a>
+                        </span>
+                    </p>
+                </section>
+            )}
         </>
     )
 }
+
+export default Login;
