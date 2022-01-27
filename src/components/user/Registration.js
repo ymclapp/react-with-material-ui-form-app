@@ -5,7 +5,7 @@ import './Registration.css';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 const USERNAME_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -140,7 +140,15 @@ const Registration = () => {
                     Must match the first password input field.
                 </p>
 
+                <Button disabled={!validName || !validPassword || !validMatch ? true : false}>Create Account</Button>
             </Form>
+
+            <p>
+                Already register?<br />
+                <span className='line'>
+                    <a href='/login'>Sign In</a>
+                </span>
+            </p>
         </section>
     )
 }
