@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import RequireAuth from './components/user/RequireAuth';
-import { BrowserRouter as Router, Switch, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Layout from './components/Layout';
 
@@ -12,9 +12,9 @@ import Header from './components/partials/Header';
 import Footer from './components/partials/Footer';
 
 //admin dashboard
-//import Demo from './components/dashboard/Demographics';
+import Demo from './components/dashboard/Demographics';
 import Users from './components/dashboard/Users';
-//import Sessions from './components/dashboard/Sessions';
+import Sessions from './components/dashboard/Sessions';
 
 
 //public pages
@@ -72,16 +72,19 @@ function App() {
     <Routes>
 
       <Route exact path='/' element={<Layout />}></Route>
+      
+        
 
       {/* public Routes */}
       <Route exact path='/home' element={<Home />}></Route>
       <Route exact path='/login' element={<Login />}></Route>
       <Route exact path='/registration' element={<Registration />}></Route>
+      <Route exact path='/dashboard' element={[<Users />, <Demo />, <Sessions />]}></Route>
       {/* <Route exact path='/linkpage' element={<LinkPage />}></Route> */}
 
       {/* we want to protect these Routes */}
       <Route element={<RequireAuth />}>
-        <Route exact path='/dashboard' element={<Users />}></Route>
+        {/* <Route exact path='/dashboard' element={<Users />}></Route> */}
       </Route>
 
       {/* catch all */}
