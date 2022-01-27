@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import RequireAuth from './components/user/RequireAuth';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Layout from './components/Layout';
 
@@ -25,7 +25,13 @@ import Registration from './components/user/Registration';
 import Login from './components/user/Login';
 
 //conference
-//import Form from './components/conference/Form';
+import Form from './components/conference/Form';
+
+const ROLES = {
+  'User': 2001,
+  'Editor': 1984,
+  'Admin': 5150
+}
 
 function App() {
   return (
@@ -79,12 +85,24 @@ function App() {
       <Route exact path='/home' element={<Home />}></Route>
       <Route exact path='/login' element={<Login />}></Route>
       <Route exact path='/registration' element={<Registration />}></Route>
-      <Route exact path='/dashboard' element={[<Users />, <Demo />, <Sessions />]}></Route>
+      <Route exact path='/dashboard' element={<Users />}></Route>
       {/* <Route exact path='/linkpage' element={<LinkPage />}></Route> */}
 
       {/* we want to protect these Routes */}
-      <Route element={<RequireAuth />}>
-        {/* <Route exact path='/dashboard' element={<Users />}></Route> */}
+      <Route element={<RequireAuth  allowedRoles={[ROLES.User]}/>}>
+        <Route exact path='/home' element={<Users />}></Route>
+      </Route>
+
+      <Route element={<RequireAuth  allowedRoles={[ROLES.Editor]}/>}>
+        <Route path='form' element={<Form />} />
+      </Route>
+
+      <Route element={<RequireAuth  allowedRoles={[ROLES.Admin]}/>}>
+        <Route path='admin' element={<Users />} />
+      </Route>
+
+      <Route element={<RequireAuth  allowedRoles={[ROLES.Editor, ROLES.Admin]}/>}>
+        <Route path='dashboard' element={[<Users />, <Demo />, <Sessions />]} />
       </Route>
 
       {/* catch all */}
