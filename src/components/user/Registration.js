@@ -26,6 +26,7 @@ const Registration = () => {
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [roles, setRoles] = useState('User');
 
     const [password, setPassword] = useState('');
     const [validPassword, setValidPassword] = useState(false);
@@ -60,7 +61,7 @@ const Registration = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [username, email, firstName, lastName, password, matchPassword])
+    }, [username, email, firstName, lastName, roles, password, matchPassword])
 
     const handleRegistrationSubmit = async (e) => {
         e.preventDefault();
@@ -71,12 +72,13 @@ const Registration = () => {
             setErrMsg("Invalid Entry");
             return;
         }
+        console.log('Submitting....');
         // console.log(username, password);
         // setSuccess(true);
 
         try {
             const response = await axios.post(REGISTRATION_URL,
-                JSON.stringify({ username, email, firstName, lastName, password }),
+                JSON.stringify({ username, email, firstName, roles, lastName, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     // withCredentials:  true
@@ -84,7 +86,8 @@ const Registration = () => {
             );
             console.log(response.data);
             console.log(response.data.jwt);
-            console.log(JSON.stringify(response))
+            console.log(response.data.user.roles);
+            // console.log(JSON.stringify(response))
             setSuccess(true);
             //clear input fields
         } catch (err) {
@@ -211,6 +214,14 @@ const Registration = () => {
                         <FloatingLabel controlId='floatingInput4' label='Last Name:  ' className='newUserLastName'>
                             <Form.Control type='text' name='lastName' value={lastName} onChange={(e) => setLastName(e.target.value)} />
                         </FloatingLabel>
+
+                        <br />
+
+                        <FloatingLabel controlId='floatingInput5' label='Role:  ' className='newUserRole'>
+                            <Form.Control type='text' name='Role' value={roles} onClick={(e) => setRoles(e.target.value)} />
+                        </FloatingLabel>
+
+                        <br />
 
                         <Button type='submit' disabled={!validName || !validPassword || !validMatch ? true : false}>Create Account</Button>
                     </Form>
