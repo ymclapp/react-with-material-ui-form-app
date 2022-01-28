@@ -10,6 +10,8 @@
 
 ##  Referenced:
 1.  https://www.youtube.com/watch?v=wOxP4k9f5rk
+2.  Add login and registration and authroutes
+3.  Email Regex:  https://stackoverflow.com/questions/5601647/html5-email-input-pattern-attribute/65442112#65442112
 
 ###  1)  index.js:
 1. import { BrowserRouter  } from 'react-router-dom';

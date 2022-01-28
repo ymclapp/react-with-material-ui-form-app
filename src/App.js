@@ -1,21 +1,12 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import RequireAuth from './components/user/RequireAuth';
+//import RequireAuth from './components/user/RequireAuth';
 import { Routes, Route } from 'react-router-dom';
-
-import Layout from './components/Layout';
 
 //partials
 import NavMenu from './components/partials/NavMenu';
 import Header from './components/partials/Header';
-import Footer from './components/partials/Footer';
-
-//admin dashboard
-import Demo from './components/dashboard/Demographics';
-import Users from './components/dashboard/Users';
-import Sessions from './components/dashboard/Sessions';
-
 
 //public pages
 import Home from './components/pages/Home';
@@ -24,92 +15,40 @@ import Registration from './components/user/Registration';
 //user pages
 import Login from './components/user/Login';
 
-//conference
-import Form from './components/conference/Form';
+function App() {
+    return (
+        <>
+        <div>
+            <NavMenu />
+            <Header />
 
-const ROLES = {
-  'User': 2001,
-  'Editor': 1984,
-  'Admin': 5150
+            <main>
+
+        <Routes>
+            {/* <Route path='*' element={<Layout />}></Route> */}
+            <Route path='/login' element={<Login />}></Route>
+            <Route Path='/registration' element={<Registration />}></Route>
+            <Route Path='/home' element={<Home />}></Route>
+        </Routes>
+        </main>
+        </div>
+        </>
+    );
 }
 
-function App() {
-  return (
-    // <>
-    //    <div className="App"></div>
+function Layout() {
+    return (
+        <>
+            <div>
+                <NavMenu />
+                <Header />
 
-    //   <Router>
-    //     <NavMenu />
-    //     <Header />
-
-    //     <Switch>
-
-    //       <Route exact path={['/', '/home']}>
-    //         <Home />
-    //       </Route>
-
-    //       <Route path='/form'>
-    //         <Form />
-    //       </Route>
-
-    //       <Route path='/registration'>
-    //         <Registration />
-    //       </Route>
-
-    //       <Route exact path='/login'>
-    //         <Login />
-    //       </Route>
-
-    //       <Route path='/dashboard'>
-    //         <Users />
-    //         <Demo />
-    //         <Sessions />
-
-    //       </Route>
-
-    //     </Switch>
-
-    //     <Footer />
-
-    //   </Router>
-
-    // </>
-
-    <Routes>
-
-      <Route exact path='/' element={<Layout />}></Route>
-      
-        
-
-      {/* public Routes */}
-      <Route exact path='/home' element={<Home />}></Route>
-      <Route exact path='/login' element={<Login />}></Route>
-      <Route exact path='/registration' element={<Registration />}></Route>
-      <Route exact path='/dashboard' element={<Users />}></Route>
-      {/* <Route exact path='/linkpage' element={<LinkPage />}></Route> */}
-
-      {/* we want to protect these Routes */}
-      <Route element={<RequireAuth  allowedRoles={[ROLES.User]}/>}>
-        <Route exact path='/home' element={<Users />}></Route>
-      </Route>
-
-      <Route element={<RequireAuth  allowedRoles={[ROLES.Editor]}/>}>
-        <Route path='form' element={<Form />} />
-      </Route>
-
-      <Route element={<RequireAuth  allowedRoles={[ROLES.Admin]}/>}>
-        <Route path='admin' element={<Users />} />
-      </Route>
-
-      <Route element={<RequireAuth  allowedRoles={[ROLES.Editor, ROLES.Admin]}/>}>
-        <Route path='dashboard' element={[<Users />, <Demo />, <Sessions />]} />
-      </Route>
-
-      {/* catch all */}
-
-
-    </Routes >
-  );
+                <main>
+                    {/* <Outlet /> */}
+                </main>
+            </div>
+        </>
+    );
 }
 
 export default App;
