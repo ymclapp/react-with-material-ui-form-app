@@ -41,15 +41,17 @@ const Login = () => {
                     //withCredentials: true
                 }
                 );
-                console.log(JSON.stringify(response?.data))
-                const accessToken = response?.data.jwt;
-                const roles = response?.data.roles;
-                setAuth({username, password, roles, accessToken});
+                console.log(response?.data)
+                console.log(response?.data.jwt)
+                console.log(response?.data.user.confirmed)
+                const jwt = response?.data.jwt;
+                const confirmed = response?.data.user.confirmed;
+                setAuth({username, password, confirmed, jwt});
             setUsername('');
             setPassword('');
             setSuccess(true);
         } catch (err) {
-            if (!err?.response) {
+            if (!err?.response === 500) {
                 setErrMsg('No Server Response');
             } else if (err.response?.status === 400) {
                 setErrMsg('Missing/Incorrect Username or Password');
@@ -104,7 +106,6 @@ const Login = () => {
                     <p>
                         Don't have an account?<br />
                         <span className='line'>
-                            {/* put router link here */}
                             <a href='/registration'> Create an Account</a>
                         </span>
                     </p>

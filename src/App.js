@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //partials
 import NavMenu from './components/partials/NavMenu';
@@ -25,47 +25,45 @@ import Login from './components/user/Login';
 import Form from './components/conference/Form';
 
 function App() {
-  return (
-    <>
-      {/* <div className="App"></div> */}
+    return (
+        <>
+<Router>
+                <div className="App">
+                    <NavMenu />
+                    <Header />
 
-      <Router>
-        <NavMenu />
-        <Header />
+                    <Switch>
 
-        <Switch>
+                        <Route exact path={['/', '/home']}>
+                            <Home />
+                        </Route>
 
-          <Route exact path={['/', '/home']}>
-            <Home />
-          </Route>
+                        <Route path='/form'>
+                            <Form />
+                        </Route>
 
-          <Route path='/form'>
-            <Form />
-          </Route>
+                        <Route path='/registration'>
+                            <Registration />
+                        </Route>
 
-          <Route path='/registration'>
-            <Registration />
-          </Route>
+                        <Route exact path='/login'>
+                            <Login />
+                        </Route>
 
-          <Route exact path='/login'>
-            <Login />
-          </Route>
+                        <Route path='/dashboard'>
+                            <Users />
+                            <Demo />
+                            <Sessions />
+                        </Route>
 
-          <Route path='/dashboard'>
-            <Users />
-            <Demo />
-            <Sessions />
+                    </Switch>
 
-          </Route>
+                    <Footer />
+                </div>
+            </Router>
 
-        </Switch>
-
-        <Footer />
-
-      </Router>
-
-    </>
-  );
+        </>
+    );
 }
 
 export default App;

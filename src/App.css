@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
-.App {
+/* .App {
   background: black;
   background: radial-gradient(
     circle,
@@ -12,7 +12,7 @@
   height: 100vh;
   display: grid;
   place-items: center;
-}
+} */
 
 body {
   margin: 0%;
