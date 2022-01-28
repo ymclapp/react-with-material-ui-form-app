@@ -10,10 +10,15 @@ ReactDOM.render(
   <React.StrictMode>
     {/* <AuthProvider> */}
     <BrowserRouter>
-    <App />
+      {/* <AuthProvider> */}
+        {/* <Routes> */}
+          <App />
+        {/* </Routes> */}
+      {/* </AuthProvider> */}
     </BrowserRouter>
-    {/* </AuthProvider> */}
-  </React.StrictMode>,
+  {/* </AuthProvider> */ }
+
+  </React.StrictMode >,
   document.getElementById('root')
 );
 

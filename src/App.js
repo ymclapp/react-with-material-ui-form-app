@@ -24,6 +24,12 @@ import Login from './components/user/Login';
 //conference
 import Form from './components/conference/Form';
 
+// const ROLES = {
+//   'User': 2001,
+//   'Editor': 1984,
+//   'Admin': 5150
+// }
+
 function App() {
     return (
         <>
