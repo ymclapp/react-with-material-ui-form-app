@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect, useContext } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import { Form, Button } from 'react-bootstrap';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import axios from '../../api/axios';
 const LOGIN_URL = '/auth/local'; //he says that this is in his node.js beginner course

@@ -200,7 +200,14 @@ const Registration = () => {
                         </p>
 
                         <FloatingLabel controlId='floatingInput2' label='Email:  ' className='newUserEmail'>
-                            <Form.Control type='text' name='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Form.Control 
+                            type='email' 
+                            name='email'
+                            value={email} 
+                            placeholder='example@domain.com'
+                            pattern='(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}'
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
                         </FloatingLabel>
 
                         <br />
